@@ -42,6 +42,17 @@ Start the HTTP viewer (defaults to port 8080) - `python wifu.py --viewer`.
 
 Start the HTTP viewer on a specific port - `python wifu.py --viewer --port 9000`.
 
+## Screenshots
+![Importing Data](https://raw.githubusercontent.com/darkosancanin/wifu/master/images/console_importing_data.png)
+
+![Viewing Statistics](https://raw.githubusercontent.com/darkosancanin/wifu/master/images/console_stats.png)
+
+![HTTP Viewer](https://raw.githubusercontent.com/darkosancanin/wifu/master/images/console_viewer.png)
+
+![Networks](https://raw.githubusercontent.com/darkosancanin/wifu/master/images/networks.png)
+
+![Clients](https://raw.githubusercontent.com/darkosancanin/wifu/master/images/clients.png)
+
 ## Database Schema
 ###client_locations
 - id [INTEGER] - Primary key for the table.
