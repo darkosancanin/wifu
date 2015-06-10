@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wifu - Viewer</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script type="text/javascript" src="/files/gmaps.js"></script>
+	<link rel="stylesheet" type="text/css" href="/files/index.html.css" />
+	<script type="text/javascript" src="/files/index.html.js"></script>
+	<link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzMzNAMzMzQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzMzMSMzMz+zMzM/szMzMSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzAjMzM6EzMzOhMzMzAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzMzM8MzMz4zMzM2IzMzMCMzMzAjMzM2IzMzPlMzMzPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzNjMzM/kzMzP/MzMz6TMzM+kzMzP/MzMz+TMzMzgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzMzMkMzMzlTMzMx4zMzM0MzMztzMzM/UzMzP1MzMztzMzMzQzMzMeMzMzlTMzMyQAAAAAAAAAAAAAAAAAAAAAMzMzYjMzM/8zMzPpMzMzYDMzMwgAAAAAAAAAADMzMwgzMzNgMzMz6TMzM/8zMzNiAAAAAAAAAAAzMzMKMzMzRjMzMwQzMzOJMzMz/TMzM/8zMzP1MzMzzTMzM80zMzP1MzMz/zMzM/0zMzOJMzMzBDMzM0YzMzMKMzMzdDMzM/8zMzOvMzMzEDMzMzIzMzOhMzMz6TMzM/8zMzP/MzMz6TMzM6EzMzMwMzMzEDMzM68zMzP/MzMzdDMzMxwzMzPVMzMz/zMzM+czMzNwMzMzFAAAAAAzMzMMMzMzDAAAAAAzMzMWMzMzcjMzM+kzMzP/MzMz0zMzMxwAAAAAMzMzDDMzM5UzMzP7MzMz/zMzM/0zMzPVMzMztzMzM7czMzPVMzMz/TMzM/8zMzP7MzMzlTMzMwwAAAAAAAAAAAAAAAAAAAAAMzMzJDMzM4szMzPXMzMz/TMzM/8zMzP/MzMz/TMzM9czMzOLMzMzJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMzMwozMzMgMzMzIDMzMwoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD//wAA/n8AAP5/AAD73wAA+B8AAOw3AADn5wAA4AcAAJgZAACP8QAAwAMAAPAPAAD//wAA//8AAA==" rel="icon" type="image/x-icon" />
+</head>
+<body>
+	<div class="container">
+		<div id="options_pane" class="options_pane">
+			<form id="options_form" name= "options_form" action="#" method="get">
+				<div>
+					<div id="options_pane_mode_browse" class="options_pane_mode options_pane_mode_selected">BROWSE</div>
+					<div id="options_pane_mode_search" class="options_pane_mode">SEARCH</div>
+				</div>
+				<div style="clear:both"></div>
+				<div>
+					<INPUT type="radio" name="options_type" id="options_type_networks" value="NETWORKS" CHECKED="true"><label for="options_type_networks">Networks</label><BR>
+					<INPUT type="radio" name="options_type" id="options_type_clients" value="CLIENTS"><label for="options_type_clients">Clients</label>
+				</div>
+				<span id="options_network_specific">
+					<div class="options_option">
+						ESSID:<br>
+						<input type="textbox" id="options_essid" class="options_textbox">
+					</div>
+					<div class="options_option">
+						Is Hidden:<br>
+						<select id="options_essid_id_hidden" class="options_dropdown">
+							<option value="">---</option>
+							<option value="yes">yes</option>
+							<option value="no">no</option>
+						</select>
+					</div>
+					<div class="options_option">
+						BSSID:<br>
+						<input type="textbox" id="options_bssid" class="options_textbox">
+					</div>
+					<div class="options_option">
+						Encryption <br>
+						<input type="checkbox" id="options_encryption_none" value="None" checked="true"><label for="options_encryption_none">None</label><br>
+						<input type="checkbox" id="options_encryption_wep" value="WEP" checked="true"><label for="options_encryption_wep">WEP</label><br>
+						<input type="checkbox" id="options_encryption_wpa" value="WPA" checked="true"><label for="options_encryption_wpa">WPA</label>
+					</div>
+				</span>
+				<span id="options_client_specific">
+					<div class="options_option">
+						Client Mac:<br>
+						<input type="textbox" id="options_client_mac" class="options_textbox">
+					</div>
+					<div class="options_option">
+						<input type="checkbox" id="options_has_hostname" value="None"><label for="options_has_hostname">Has Hostname</label>
+					</div>
+					<div class="options_option">
+						Hostname:<br>
+						<input type="textbox" id="options_hostname" class="options_textbox">
+					</div>
+					<div class="options_option">
+						Probing for SSID:<br>
+						<input type="textbox" id="options_probing_for_ssid" class="options_textbox">
+					</div>
+				</span>
+				<div class="options_option">
+					Seen After:<br>
+					<input type="textbox" id="options_seen_after_date" class="options_textbox options_date">
+				</div>
+				<div class="options_option">
+					Seen Before:<br>
+					<input type="textbox" id="options_seen_before_date" class="options_textbox options_date">
+				</div>
+				<div class="options_option">
+					Metres Between Locations Between:<br>
+					<input type="textbox" id="options_max_metres_greater_than" class="options_textbox options_number">
+					and
+					<input type="textbox" id="options_max_metres_less_than" class="options_textbox options_number">
+				</div>
+				<div class="options_option">
+					Times Seen Between:<br>
+					<input type="textbox" id="options_number_of_times_seen_greater_than" class="options_textbox options_number">
+					and
+					<input type="textbox" id="options_number_of_times_seen_less_than" class="options_textbox options_number">
+				</div>
+				<div class="options_option">
+					Max Records:<br>
+					<input type="textbox" id="options_max_records" value="500" class="options_textbox options_number">
+				</div>
+				<div class="options_option">
+					Order By:<br>
+					<select id="sort_by_property" class="options_dropdown">
+						<option value="" selected>---</option>
+						<option value="essid">ESSID</option>
+						<option value="length_clients">Number of Clients</option>
+						<option value="length_probe_requests">No. of Probe Requests</option>
+						<option value="hostname">Hostname</option>
+						<option value="max_metres_between_locations">Metres btwn Locations</option>
+						<option value="number_of_times_seen">Number of Times Seen</option>
+						<option value="total_packets">Total Packets</option>
+						<option value="seen_first_time">Seen First Time</option>
+						<option value="seen_last_time">Seen Last Time</option>
+					</select>
+					<select id="sort_by_direction" class="options_dropdown">
+						<option value="desc">desc</option>
+						<option value="asc">asc</option>
+					</select>
+				</div>
+				<div>
+					<button type="button" value="search" id="options_search">search</button>
+				</div>
+				<div>
+					<button type="button" value="search" id="options_reset">reset</button>
+				</div>
+			</form>
+		</div>
+		<div id="results_pane" class="results_pane">
+			<div class="results_found_section">Displaying: 
+				<span id="results_found"></span>
+			</div>
+			<ul id="results_list"></ul>
+		</div>
+		<div id="map" class="map_pane"></div>
+		<div id="go_to_address">
+				<input type="textbox" id="address">
+				<button type="button" value="go" id="go_to_address_button">go</button>
+		</div>
+		<div id="network_details_pane" class="details_pane">
+			<div class="details_type">
+				NETWORK
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">ESSID:</span><br>
+				<span id="network_details_essid"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">SSID:</span><br>
+				<span id="network_details_bssid"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Hidden:</span>
+				<span id="network_details_is_hidden"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Encryptions:</span><br>
+				<span id="network_details_encryptions"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">First Seen:</span>
+				<span id="network_details_seen_first_time"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Last Seen:</span>
+				<span id="network_details_seen_last_time"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Total Packets:</span>
+				<span id="network_details_total_packets"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Number of Times Seen:</span>
+				<span id="network_details_number_of_times_seen"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Max Metres Between Locations:</span>
+				<span id="network_details_max_metres_between_locations"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Location:</span><br>
+				<span id="network_details_location"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Clients:</span><br>
+				<ul id="network_details_clients" class="details_list"></ul>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Locations:</span><br>
+				<ul id="network_details_locations" class="details_list"></ul>
+			</div>
+			<div class="details_close_window">
+				<a href="#" id="network_details_close_window">close window</a>
+			</div>
+		</div>
+		<div id="client_details_pane" class="details_pane">
+			<div class="details_type">
+				CLIENT
+			</div>
+			<div class="details_detail" id="client_details_hostname_section">
+				<span class="details_detail_heading">Hostname:</span><br>
+				<span id="client_details_hostname"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Client Mac:</span><br>
+				<span id="client_details_client_mac"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">First Seen:</span>
+				<span id="client_details_seen_first_time"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Last Seen:</span>
+				<span id="client_details_seen_last_time"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Total Packets:</span>
+				<span id="client_details_total_packets"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Number of Times Seen:</span>
+				<span id="client_details_number_of_times_seen"></span>
+			</div>
+			<div class="details_detail">
+				<span class="details_detail_heading">Max Metres Between Locations:</span>
+				<span id="client_details_max_metres_between_locations"></span>
+			</div>
+			<div id="client_details_networks_section" class="details_detail">
+				<span class="details_detail_heading">Networks:</span><br>
+				<ul id="client_details_networks" class="details_list"></ul>
+			</div>
+			<div id="client_details_probe_requests_section" class="details_detail">
+				<span class="details_detail_heading">Probe Requests:</span><br>
+				<ul id="client_details_probe_requests" class="details_list"></ul>
+			</div>
+			<div id="client_details_locations_section" class="details_detail">
+				<span class="details_detail_heading">Locations:</span><br>
+				<ul id="client_details_locations" class="details_list"></ul>
+			</div>
+			<div class="details_close_window">
+				<a href="#" id="client_details_close_window">close window</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
