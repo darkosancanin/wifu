@@ -1,1 +1,0 @@
-TRANSPORT_LAYERS = ['UDP', 'TCP']
